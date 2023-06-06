@@ -2,6 +2,7 @@ import Phaser, { Physics } from 'phaser'
 
 import TextureKeys from '../consts/TextureKeys'
 import AnimationKeys from '../consts/AnimationKeys'
+import SceneKeys from '../consts/SceneKeys'
 
 enum MouseState {
   Running,
@@ -68,6 +69,7 @@ export default class RocketMouse extends Phaser.GameObjects.Container {
         break
       case MouseState.Dead:
         body.setVelocity(0, 0)
+        this.scene.scene.run(SceneKeys.GameOver)
         break
     }
   }
@@ -84,7 +86,7 @@ export default class RocketMouse extends Phaser.GameObjects.Container {
 
     const body = this.body as Phaser.Physics.Arcade.Body
     body.setAccelerationY(0)
-    body.setVelocity(1000, 0)
+    body.setVelocity(600, 0)
     this.enableJetpack(false)
   }
 }
