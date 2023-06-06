@@ -82,7 +82,7 @@ export default class Game extends Phaser.Scene {
     const body = mouse.body as Phaser.Physics.Arcade.Body
     body.setCollideWorldBounds(true)
     body.setVelocityX(200)
-    this.physics.world.setBounds(0, 0, Number.MAX_SAFE_INTEGER, height - 30)
+    this.physics.world.setBounds(0, 0, Number.MAX_SAFE_INTEGER, height - 55)
 
     // camera
     this.cameras.main.startFollow(mouse)
@@ -137,7 +137,7 @@ export default class Game extends Phaser.Scene {
       const body = coin.body as Phaser.Physics.Arcade.StaticBody
       body.setCircle(body.width * 0.5)
       body.enable = true
-
+      body.updateFromGameObject()
       x += coin.width * 1.5
     }
   }
@@ -231,6 +231,7 @@ export default class Game extends Phaser.Scene {
         return Math.abs(this.bookcase2.x - win.x) <= win.width
       })
       this.bookcase2.visible = !overlap
+      this.spawnCoins()
     }
   }
 
