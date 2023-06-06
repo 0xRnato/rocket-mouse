@@ -6,11 +6,12 @@ import AnimationKeys from '../consts/AnimationKeys'
 export default class RocketMouse extends Phaser.GameObjects.Container {
   private flames: Phaser.GameObjects.Sprite
   private cursors: Phaser.Types.Input.Keyboard.CursorKeys
+  private mouse: Phaser.GameObjects.Sprite
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y)
 
-    const mouse = scene.add.sprite(0, 0, TextureKeys.RocketMouse)
+    this.mouse = scene.add.sprite(0, 0, TextureKeys.RocketMouse)
       .setOrigin(0.5, 1)
       .play(AnimationKeys.RocketMouseRun)
     this.flames = scene.add.sprite(-63, -15, TextureKeys.RocketMouse)
@@ -18,12 +19,12 @@ export default class RocketMouse extends Phaser.GameObjects.Container {
     this.enableJetpack(false)
 
     this.add(this.flames)
-    this.add(mouse)
+    this.add(this.mouse)
 
     scene.physics.add.existing(this)
     const body = this.body as Physics.Arcade.Body
-    body.setSize(mouse.width, mouse.height)
-    body.setOffset(mouse.width * -0.5, -mouse.height)
+    body.setSize(this.mouse.width, this.mouse.height)
+    body.setOffset(this.mouse.width * -0.5, -this.mouse.height)
 
     this.cursors = scene.input.keyboard.createCursorKeys()
   }
@@ -38,9 +39,17 @@ export default class RocketMouse extends Phaser.GameObjects.Container {
     if (this.cursors.space?.isDown) {
       body.setAccelerationY(-600)
       this.enableJetpack(true)
+      this.mouse.play(AnimationKeys.RocketMouseFly, true)
     } else {
       body.setAccelerationY(0)
       this.enableJetpack(false)
+    }
+
+    // check if is touching the ground
+    if (body.blocked.down) {
+      this.mouse.play(AnimationKeys.RocketMouseRun, true)
+    } else if (body.velocity.y > 0) {
+      this.mouse.play(AnimationKeys.RocketMouseFall, true)
     }
   }
 }

@@ -24,7 +24,7 @@ export default class Preloader extends Phaser.Scene {
   }
 
   create() {
-    // character animations
+    // run animation
     this.anims.create({
       key: AnimationKeys.RocketMouseRun,
       frames: this.anims.generateFrameNames(TextureKeys.RocketMouse, {
@@ -36,6 +36,24 @@ export default class Preloader extends Phaser.Scene {
       }),
       frameRate: 10,
       repeat: -1
+    })
+
+    // fall animation
+    this.anims.create({
+      key: AnimationKeys.RocketMouseFall,
+      frames: [{
+        key: TextureKeys.RocketMouse,
+        frame: 'rocketmouse_fall01.png'
+      }]
+    })
+
+    // fly animation
+    this.anims.create({
+      key: AnimationKeys.RocketMouseFly,
+      frames: [{
+        key: TextureKeys.RocketMouse,
+        frame: 'rocketmouse_fly01.png'
+      }]
     })
 
     // flame animation
