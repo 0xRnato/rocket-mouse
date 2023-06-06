@@ -5,7 +5,9 @@ enum TextureKeys {
   MouseHole = 'mouse-hole',
   RocketMouse = 'rocket-mouse',
   Window1 = 'window-1',
-  Window2 = 'window-2'
+  Window2 = 'window-2',
+  LaserEnd = 'laser-end',
+  LaserMiddle = 'laser-middle'
 }
 
 export default TextureKeys

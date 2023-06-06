@@ -12,7 +12,6 @@ export default class Preloader extends Phaser.Scene {
   preload() {
     // background
     this.load.image(TextureKeys.Background, 'house/bg_repeat_340x640.png')
-
     this.load.image(TextureKeys.MouseHole, 'house/object_mousehole.png')
     this.load.image(TextureKeys.Window1, 'house/object_window1.png')
     this.load.image(TextureKeys.Window2, 'house/object_window2.png')
@@ -21,6 +20,10 @@ export default class Preloader extends Phaser.Scene {
 
     // character
     this.load.atlas(TextureKeys.RocketMouse, 'characters/rocket-mouse.png', 'characters/rocket-mouse.json')
+
+    // laser
+    this.load.image(TextureKeys.LaserEnd, 'house/object_laser_end.png')
+    this.load.image(TextureKeys.LaserMiddle, 'house/object_laser.png')
   }
 
   create() {
@@ -67,6 +70,19 @@ export default class Preloader extends Phaser.Scene {
       }),
       frameRate: 10,
       repeat: -1
+    })
+
+    // dead animation
+    this.anims.create({
+      key: AnimationKeys.RocketMouseDead,
+      frames: this.anims.generateFrameNames(TextureKeys.RocketMouse, {
+        start: 1,
+        end: 2,
+        prefix: 'rocketmouse_dead',
+        zeroPad: 2,
+        suffix: '.png'
+      }),
+      frameRate: 10
     })
 
     this.scene.start(SceneKeys.Game)
