@@ -15,7 +15,7 @@ export default class LaserObstacle extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0)
     
     // set height of the middle laser to 200px
-    middle.setDisplaySize(middle.width, 200)
+    middle.setDisplaySize(middle.width, 100)
 
     // create a bottom that is flipped and bellow the middle
     const bottom = scene.add.image(0, middle.y + middle.displayHeight, TextureKeys.LaserEnd)

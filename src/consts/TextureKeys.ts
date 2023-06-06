@@ -7,7 +7,8 @@ enum TextureKeys {
   Window1 = 'window-1',
   Window2 = 'window-2',
   LaserEnd = 'laser-end',
-  LaserMiddle = 'laser-middle'
+  LaserMiddle = 'laser-middle',
+  Coin = 'coin'
 }
 
 export default TextureKeys
